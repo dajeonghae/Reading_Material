@@ -18,68 +18,6 @@ const InputContainer = styled.div`
   margin-bottom: -6px;
 `;
 
-const FilePreviewArea = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 4px 8px 8px 8px;
-`;
-
-const ImagePreview = styled.div`
-  position: relative;
-  width: 56px;
-  height: 56px;
-  flex-shrink: 0;
-`;
-
-const ImageThumb = styled.img`
-  width: 56px;
-  height: 56px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-`;
-
-const PdfPreview = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
-  border-radius: 8px;
-  background-color: #f5f5f5;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  max-width: 160px;
-`;
-
-const PdfName = styled.span`
-  font-size: 12px;
-  color: #444;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 110px;
-`;
-
-const RemoveButton = styled.button`
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: none;
-  background-color: #555;
-  color: white;
-  font-size: 11px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  line-height: 1;
-`;
-
 const InputRow = styled.div`
   display: flex;
   align-items: flex-end;
