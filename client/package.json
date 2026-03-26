@@ -1,0 +1,55 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://daejeonghae.github.io/chatstructure",
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.6.0",
+    "@shadcn/ui": "^0.0.4",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@xyflow/react": "^12.4.4",
+    "axios": "^1.7.9",
+    "d3": "^7.9.0",
+    "katex": "^0.16.21",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-force-graph": "^1.47.3",
+    "react-force-graph-2d": "^1.27.0",
+    "react-markdown": "^9.0.3",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.1.5",
+    "react-scripts": "5.0.1",
+    "reactflow": "^11.11.4",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "styled-components": "^6.1.15",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
