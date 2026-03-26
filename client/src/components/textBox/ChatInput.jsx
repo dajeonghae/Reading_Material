@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import styled from "styled-components";
 
 const InputContainer = styled.div`
@@ -145,117 +144,22 @@ const SendButton = styled.button`
   flex-shrink: 0;
 `;
 
-function ChatInput({
-  input,
-  isLoading,
-  isExpanded,
-  textareaRef,
-  onChange,
-  onKeyDown,
-  onSend,
-  attachedFiles = [],
-  onAttachFiles,
-  onRemoveFile,
-}) {
-  const fileInputRef = useRef(null);
-
-  const handleAttachClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
-    if (files.length > 0) onAttachFiles(files);
-    e.target.value = "";
-  };
-
-  const handlePaste = (e) => {
-    const items = Array.from(e.clipboardData?.items || []);
-    const imageItems = items.filter((item) => item.type.startsWith("image/"));
-    if (imageItems.length > 0) {
-      e.preventDefault();
-      const files = imageItems.map((item) => item.getAsFile()).filter(Boolean);
-      if (files.length > 0) onAttachFiles(files);
-    }
-  };
-
+function ChatInput() {
   return (
-    <InputContainer
-      $isExpanded={isExpanded}
-      $hasFiles={attachedFiles.length > 0}
-      style={{
-        opacity: 0.5,
-        pointerEvents: "none",
-      }}
-    >
-      {attachedFiles.length > 0 && (
-        <FilePreviewArea>
-          {attachedFiles.map((f, i) =>
-            f.type.startsWith("image/") ? (
-              <ImagePreview key={i}>
-                <ImageThumb src={f.preview} alt={f.name} />
-                <RemoveButton onClick={() => onRemoveFile(i)}>×</RemoveButton>
-              </ImagePreview>
-            ) : (
-              <PdfPreview key={i}>
-                <span
-                  className="material-symbols-outlined"
-                  style={{ fontSize: 16, color: "#e74c3c" }}
-                >
-                  picture_as_pdf
-                </span>
-                <PdfName title={f.name}>{f.name}</PdfName>
-                <RemoveButton
-                  onClick={() => onRemoveFile(i)}
-                  style={{ position: "static", marginLeft: "auto" }}
-                >
-                  ×
-                </RemoveButton>
-              </PdfPreview>
-            )
-          )}
-        </FilePreviewArea>
-      )}
-
+    <InputContainer>
       <InputRow>
-        <AttachButton onClick={handleAttachClick} type="button">
-          <span
-            className="material-symbols-outlined"
-            style={{ fontSize: 22, userSelect: "none" }}
-          >
+        <AttachButton type="button" disabled>
+          <span className="material-symbols-outlined" style={{ fontSize: 22, userSelect: "none" }}>
             attach_file
           </span>
         </AttachButton>
-
-        <TextArea
-          ref={textareaRef}
-          value={input}
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          onPaste={handlePaste}
-          placeholder="메세지 입력하기"
-          disabled={isLoading}
-          rows={1}
-        />
-
-        <SendButton onClick={onSend} disabled={isLoading}>
-          <span
-            className="material-symbols-outlined md-white md-24"
-            style={{ userSelect: "none" }}
-          >
+        <TextArea placeholder="메세지 입력하기" disabled rows={1} />
+        <SendButton disabled>
+          <span className="material-symbols-outlined md-white md-24" style={{ userSelect: "none" }}>
             arrow_upward
           </span>
         </SendButton>
       </InputRow>
-
-      <input
-        type="file"
-        ref={fileInputRef}
-        accept="image/*,.pdf,application/pdf"
-        multiple
-        style={{ display: "none" }}
-        onChange={handleFileChange}
-      />
     </InputContainer>
   );
 }
