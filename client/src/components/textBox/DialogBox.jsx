@@ -56,18 +56,6 @@ const MessageBubble = styled.div`
     box-shadow: ${(props) => (props.isActive && props.isScrolled ? '0 4px 12px rgba(0, 0, 0, 0.1)' : 'none')};
 `;
 
-const LabelContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
-    align-items: center;
-`;
-
-const Label = styled.div`
-    font-size: 14px;
-    color: ${COLORS.basic_font};
-`;
-
 const AttachmentsRow = styled.div`
     display: flex;
     flex-wrap: wrap;

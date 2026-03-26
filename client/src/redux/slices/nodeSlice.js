@@ -198,7 +198,6 @@ const nodeSlice = createSlice({
           simStats: simStats ?? null,
           parent: state.nodes[id]?.parent ?? undefined,
           relation: state.nodes[id]?.relation ?? undefined,
-          dialog: {},
           createdAt: Date.now(),
           keywords: [],
         };
