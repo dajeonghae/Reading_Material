@@ -7,15 +7,14 @@ const InputContainer = styled.div`
   width: 95%;
   min-height: 40px;
   padding: 8px;
-
-  border-radius: ${(props) => (props.$isExpanded || props.$hasFiles ? "20px" : "100px")};
-  transition: border-radius 0.2s ease-in-out;
-
+  border-radius: 100px;
   border: 1px solid rgba(240, 240, 240);
-  background-color: #ffffff;
-  box-shadow: 0px 8px 24px rgba(149, 157, 165, 0.2);
+  background-color: #f5f5f5;
+  box-shadow: none;
   margin-left: -20px;
   margin-bottom: -6px;
+  opacity: 0.5;
+  cursor: not-allowed;
 `;
 
 const InputRow = styled.div`
@@ -60,13 +59,9 @@ const AttachButton = styled.button`
   border: none;
   border-radius: 50%;
   background-color: transparent;
-  cursor: pointer;
-  color: #888;
+  cursor: not-allowed;
+  color: #bbb;
   flex-shrink: 0;
-
-  &:hover {
-    background-color: #f5f5f5;
-  }
 `;
 
 const SendButton = styled.button`
@@ -77,8 +72,8 @@ const SendButton = styled.button`
   height: 40px;
   border: none;
   border-radius: 50%;
-  background-color: #373d47;
-  cursor: pointer;
+  background-color: #c0c0c0;
+  cursor: not-allowed;
   flex-shrink: 0;
 `;
 
