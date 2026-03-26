@@ -11,7 +11,6 @@ import { store } from '../redux/store.js';
 import axios from 'axios';
 import DialogPair from '../components/textBox/DialogPair.jsx';
 import ChatInput from '../components/textBox/ChatInput.jsx';
-import EndExperimentButton from '../components/button/EndExperimentButton.jsx';
 import { trackMessage } from '../services/trackingService.js';
 
 const Container = styled.div`
@@ -78,7 +77,7 @@ const ImportButton = styled(SaveButton)`
   border: 1px solid #2d3748;
 `;
 
-function ChatOnly({ onLogout }) {
+function ChatOnly() {
   const [messages, setMessages] = useState(() => {
     try { return JSON.parse(localStorage.getItem('experiment_messages_chatonly')) || []; }
     catch { return []; }
@@ -261,7 +260,6 @@ function ChatOnly({ onLogout }) {
         />
       </ChatInputWrapper>
       </InnerWrapper>
-      <EndExperimentButton onEnd={onLogout} />
     </Container>
   );
 }
