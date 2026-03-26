@@ -96,6 +96,24 @@ function ChatOnly() {
   const currentNodeId = activeNodeIds[activeNodeIds.length - 1] || 'root';
 
   useEffect(() => {
+    const loadInitial = async () => {
+      try {
+        const r = await fetch('/Reading_Material/chatgraph.json');
+        const snap = await r.json();
+        if (!snap) return;
+        const { messages: restored } = await dispatch(loadSnapshotThunk(snap));
+        setMessages(restored || []);
+        setTimeout(() => {
+          messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }, 0);
+      } catch (e) {
+        console.error('chatgraph.json 로드 실패:', e);
+      }
+    };
+    loadInitial();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
     localStorage.setItem('experiment_messages_chatonly', JSON.stringify(messages));
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -236,7 +254,7 @@ function ChatOnly() {
         <div ref={messagesEndRef} />
       </MessagesContainer>
 
-      <TopButtonContainer>
+      {/* <TopButtonContainer>
         <ExportButton onClick={handleExportSnapshot}>Export</ExportButton>
         <ImportButton onClick={handleLoadFromServer}>Import</ImportButton>
         <input
@@ -246,7 +264,7 @@ function ChatOnly() {
           style={{ display: 'none' }}
           onChange={handleImportSnapshot}
         />
-      </TopButtonContainer>
+      </TopButtonContainer> */}
 
       <ChatInputWrapper>
         <ChatInput
