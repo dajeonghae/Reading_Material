@@ -2,13 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { sendMessageToApi } from '../services/chatbotService.js';
-import {
-  buildFullSnapshot,
-  downloadSnapshotFile,
-  loadSnapshotThunk,
-} from '../utils/snapshotManager.js';
-import { store } from '../redux/store.js';
-import axios from 'axios';
+import { loadSnapshotThunk } from '../utils/snapshotManager.js';
 import DialogPair from '../components/textBox/DialogPair.jsx';
 import ChatInput from '../components/textBox/ChatInput.jsx';
 import { trackMessage } from '../services/trackingService.js';
@@ -48,34 +42,6 @@ const MessagesContainer = styled.div`
   scrollbar-width: none;
 `;
 
-const TopButtonContainer = styled.div`
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 100;
-`;
-
-const SaveButton = styled.button`
-  padding: 8px 12px;
-  background-color: #4299e1;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-`;
-
-const ExportButton = styled(SaveButton)`
-  background-color: #2d3748;
-`;
-
-const ImportButton = styled(SaveButton)`
-  background-color: #ffffff;
-  color: #2d3748;
-  border: 1px solid #2d3748;
-`;
 
 function ChatOnly() {
   const [messages, setMessages] = useState(() => {
@@ -89,7 +55,6 @@ function ChatOnly() {
   const messagesEndRef = useRef(null);
   const messageRefs = useRef([]);
   const textareaRef = useRef(null);
-  const fileInputRef = useRef(null);
 
   const dispatch = useDispatch();
   const activeNodeIds = useSelector((state) => state.node.activeNodeIds);
@@ -181,50 +146,6 @@ function ChatOnly() {
     } else {
       setIsExpanded(false);
       e.target.style.height = '40px';
-    }
-  };
-
-  const handleExportSnapshot = () => {
-    const reduxState = store.getState();
-    const snapshot = buildFullSnapshot(reduxState, messages);
-    downloadSnapshotFile(snapshot);
-  };
-
-  const handleImportSnapshot = async (e) => {
-    const file = e.target.files?.[0];
-    e.target.value = '';
-    if (!file) return;
-
-    try {
-      const { messages: restored } = await dispatch(loadSnapshotThunk(file));
-      setMessages(restored || []);
-      setTimeout(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-      }, 0);
-      alert('📦 스냅샷 복원 완료!(JSON)');
-    } catch (err) {
-      console.error(err);
-      alert('❌ 스냅샷 불러오기 실패 (콘솔 확인)');
-    }
-  };
-
-  const handleLoadFromServer = async () => {
-    try {
-      const r = await axios.get('http://localhost:8080/api/chatgraph/get');
-      const snap = r.data?.snapshot;
-      if (!snap) throw new Error('no snapshot returned');
-
-      const { messages: restored } = await dispatch(loadSnapshotThunk(snap));
-      setMessages(restored || []);
-
-      setTimeout(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-      }, 0);
-
-      alert('♻️ 서버에서 스냅샷 불러오기 완료 (chatgraph.json)');
-    } catch (e) {
-      console.error(e);
-      alert('❌ 서버 불러오기 실패 (콘솔 확인)');
     }
   };
 
