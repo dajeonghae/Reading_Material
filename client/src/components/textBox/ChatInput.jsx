@@ -184,8 +184,8 @@ function ChatInput({
       $isExpanded={isExpanded}
       $hasFiles={attachedFiles.length > 0}
       style={{
-        opacity: isLoading ? 0.5 : 1,
-        pointerEvents: isLoading ? "none" : "auto",
+        opacity: 0.5,
+        pointerEvents: "none",
       }}
     >
       {attachedFiles.length > 0 && (
